@@ -5,6 +5,12 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import lock from "../../assets/lock.svg";
 
+
+type Errors = {
+    email?: String;
+    password?: String;
+};
+
 const LoginPage = () => {
     const navigate = useNavigate();
     //               useState initializes the login data state with default empty values
@@ -13,14 +19,11 @@ const LoginPage = () => {
         password: ''
     });
     const [showPassword, setShowPassword] = useState(true);
-
-    //          states for handling the form errors
-    const [errors, setErrors] = useState({});
-
+    const [errors, setErrors] = useState<Errors>({});           //          states for handling the form errors
     
     //      function for validating the form inputs by using regex
     const validateForm = () => {
-        const errors = {};
+        const errors: Errors = {};          // Use the defined Errors type
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         
         //      check if the email input is empty
@@ -40,7 +43,7 @@ const LoginPage = () => {
     };
     
     //      Fucntion for user login
-    const handleLogin = async (e) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();                     // Prevents the default form submission behavior (like refreshing the page)
 
         if (!validateForm()) {

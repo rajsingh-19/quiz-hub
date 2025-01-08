@@ -5,6 +5,14 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import lock from "../../assets/lock.svg"; 
 
+type Errors = {
+    name?: String;
+    email?: String;
+    mobile?: String;
+    password?: String;
+    checkbox?: String;
+};
+
 const RegisterPage = () => {
     const navigate = useNavigate();
 
@@ -20,39 +28,39 @@ const RegisterPage = () => {
     const [checkboxChecked, setCheckboxChecked] = useState(false);
 
     //          states for handling the form errors
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState<Errors>({});
 
     // Form validation logic
-  const validateForm = () => {
-    const validationErrors = {};
+    const validateForm = () => {
+        const validationErrors: Errors = {};
 
-    if (!registerFormData.name.trim()) {
-      validationErrors.name = "Name is required.";
+        if (!registerFormData.name.trim()) {
+            validationErrors.name = "Name is required.";
+        };
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(registerFormData.email)) {
+            validationErrors.email = "Invalid email format.";
+        };
+
+        if(registerFormData.mobile.length < 10 ) {
+            validationErrors.mobile = "Enter 10 digit mobile number.";
+        };
+
+        if (registerFormData.password.length < 8) {
+            validationErrors.password = "Password must be at least 8 characters long.";
+        };
+
+        if (!checkboxChecked) {
+            validationErrors.checkbox = "You must agree to the terms of use and privacy policy.";
+        };
+
+        setErrors(validationErrors);
+        return Object.keys(validationErrors).length === 0;
     };
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(registerFormData.email)) {
-      validationErrors.email = "Invalid email format.";
-    };
-
-    if(registerFormData.mobile.length < 10 ) {
-        validationErrors.mobile = "Enter 10 digit mobile number.";
-    };
-
-    if (registerFormData.password.length < 8) {
-      validationErrors.password = "Password must be at least 8 characters long.";
-    };
-
-    if (!checkboxChecked) {
-        validationErrors.checkbox = "You must agree to the terms of use and privacy policy.";
-    }
-
-    setErrors(validationErrors);
-    return Object.keys(validationErrors).length === 0;
-  };
 
     //               Function to handle form submission and register the user
-    const handleRegisterUser = async (e) => {
+    const handleRegisterUser = async (e: React.FormEvent) => {
         e.preventDefault();                         // Prevents the default form submission behavior (like refreshing the page)
 
         if (!validateForm()) {
@@ -61,7 +69,6 @@ const RegisterPage = () => {
         console.log(registerFormData);
     };
     
-
     const handleLogin = () => {
         navigate('/login');
     }
