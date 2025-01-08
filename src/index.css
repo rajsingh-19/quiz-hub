@@ -1,0 +1,145 @@
+* {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/*      font style     */
+.dm-sans {
+  font-family: "DM Sans";
+}
+.roboto {
+  font-family: "Roboto";
+}
+/*      display    */
+.flex {
+  display: flex;
+}
+.dir-row {
+  flex-direction: row;
+}
+.dir-col {
+  flex-direction: column;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-space-btwn {
+  justify-content: space-between;
+}
+.row-rev {
+  flex-direction: row-reverse;
+}
+.align-center {
+  align-items: center;
+}
+.bg-transparent {
+  background: transparent;
+}
+/*        font wt    */
+.font-wt-700 {
+  font-weight: 700;
+}
+.font-wt-500 {
+  font-weight: 500;
+}
+/*    positions    */
+.position-relative {
+  position: relative;
+}
+.position-fixed {
+  position: fixed;
+}
+.position-absolute {
+  position: absolute;
+}
+.position-sticky {
+  position: sticky;
+}
+/*      button and input   */
+.outline-none {
+  outline: none;
+}
+.border-none {
+  border: none;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+/*      text deco   */
+.underline {
+  text-decoration: underline;
+}
+/*    text-color     */
+.text-grayClr {
+  color: #525252;
+}
+.text-white {
+  color: #ffffff;
+}
+/*      font size    */
+.text-14 {
+  font-size: 14px;
+}
+.text-16 {
+  font-size: 16px;
+}
+.text-18 {
+  font-size: 18px;
+}
+.text-19 {
+  font-size: 19px;
+}
+.text-20 {
+  font-size: 20px;
+}
+.text-22 {
+  font-size: 22px;
+}
+.text-24 {
+  font-size: 24px;
+}
+.text-30 {
+  font-size: 30px;
+}
+.text-35 {
+  font-size: 35px;
+}
+/*      padding and margin     */
+.p-t-10 {
+  padding-top: 5px;
+}
+.m-t-30 {
+  margin-top: 30px;
+}
+.m-t-15 {
+  margin-top: 15px;
+}
+.m-tb-5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.m-b-5 {
+  margin-bottom: 5px;
+}
+.m-b-10 {
+  margin-bottom: 10px;
+}
+.m-b-15 {
+  margin-bottom: 15px;
+}
+.m-b-20 {
+  margin-bottom: 20px;
+}
+.m-b-25 {
+  margin-bottom: 25px;
+}
+.m-r-5 {
+  margin-right: 5px;
+}
+.m-r-20 {
+  margin-right: 20px;
+}
