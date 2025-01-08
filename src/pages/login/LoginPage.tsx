@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import { IoEyeOutline } from "react-icons/io5";
@@ -7,11 +7,11 @@ import lock from "../../assets/lock.svg";
 
 
 type Errors = {
-    email?: String;
-    password?: String;
+    email?: string;
+    password?: string;
 };
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
     const navigate = useNavigate();
     //               useState initializes the login data state with default empty values
     const [loginFormData, setLoginFormData] = useState({
@@ -53,8 +53,12 @@ const LoginPage = () => {
         console.log(loginFormData);
     };
 
+    const passwordVisibility = () => {
+        setShowPassword((prev) => !prev);
+    };
+
     //              function for handle the sign up 
-    const hanldeSignUp = () => {
+    const handleRegister = () => {
         navigate('/register');
     }
 
@@ -74,7 +78,7 @@ const LoginPage = () => {
                     <img className={styles.inputIcons} src={lock} alt="lock icon" />
                     <input className={`${styles.passwordInput} text-16 dm-sans font-wt-500 border-none outline-none`}  type={showPassword ? "password" : "text"} name="password" value={loginFormData.password} placeholder="Password" onChange={(e) => setLoginFormData({...loginFormData, [e.target.name]: e.target.value})} />
                     {
-                        showPassword ? <IoEyeOffOutline onClick={() => setShowPassword(!showPassword)} className={`${styles.hideShowIcons} cursor-pointer`} /> : <IoEyeOutline onClick={() => setShowPassword(!showPassword)} className={`${styles.hideShowIcons} cursor-pointer`} /> 
+                        showPassword ? <IoEyeOffOutline onClick={passwordVisibility} className={`${styles.hideShowIcons} cursor-pointer`} /> : <IoEyeOutline onClick={passwordVisibility} className={`${styles.hideShowIcons} cursor-pointer`} /> 
                     }
                 </div>
                 {errors.password && <p className={styles.errorMessage}>{errors.password}</p>}
@@ -84,7 +88,7 @@ const LoginPage = () => {
             </form>
             <div className={`${styles.lastLine} flex dir-col align-center`}>
                 <span className="dm-sans font-wt-500 text-19 text-grayClr">Don't have an account?</span>&nbsp;&nbsp;
-                <button className={`dm-sans text-19 font-wt-500 underline ${styles.signupBtn} border-none cursor-pointer`} onClick={hanldeSignUp}>Sign Up</button>
+                <button className={`dm-sans text-19 font-wt-500 underline ${styles.signupBtn} border-none cursor-pointer`} onClick={handleRegister}>Sign Up</button>
             </div>
         </div>
     )

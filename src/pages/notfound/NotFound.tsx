@@ -1,6 +1,7 @@
+import React from "react";
 import styles from "./notfound.module.css";
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   return (
     <div className={styles.notFoundContainer}>
       <h1>404</h1>

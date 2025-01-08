@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../login/login.module.css";
 import { IoEyeOutline } from "react-icons/io5";
@@ -13,7 +13,7 @@ type Errors = {
     checkbox?: String;
 };
 
-const RegisterPage = () => {
+const RegisterPage: React.FC = () => {
     const navigate = useNavigate();
 
     //              useState initializes the form data state with default empty values
@@ -69,9 +69,13 @@ const RegisterPage = () => {
         console.log(registerFormData);
     };
     
+    const passwordVisibility = () => {
+        setShowPassword((prev) => !prev);
+    };
+
     const handleLogin = () => {
         navigate('/login');
-    }
+    };
 
     return (
         <div className="flex dir-row">
@@ -99,7 +103,7 @@ const RegisterPage = () => {
                         <img className={styles.inputIcons} src={lock} alt="lock icon" />
                         <input className={`${styles.passwordInput} text-16 dm-sans font-wt-500 border-none outline-none`} type={showPassword ? "password" : "text"} name='password' value={registerFormData.password} placeholder="Password" onChange={(e) => setRegisterFormData({...registerFormData, [e.target.name]: e.target.value})} />
                         {
-                            showPassword ? <IoEyeOffOutline onClick={() => setShowPassword(!showPassword)} className={`${styles.hideShowIcons} cursor-pointer`} /> : <IoEyeOutline onClick={() => setShowPassword(!showPassword)} className={`${styles.hideShowIcons} cursor-pointer`} /> 
+                            showPassword ? <IoEyeOffOutline onClick={passwordVisibility} className={`${styles.hideShowIcons} cursor-pointer`} /> : <IoEyeOutline onClick={passwordVisibility} className={`${styles.hideShowIcons} cursor-pointer`} /> 
                         }
                     </div>
                     {errors.password && <p className={styles.errorMessage}>{errors.password}</p>}

@@ -1,7 +1,8 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./nav.module.css";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
     const navigate = useNavigate();
 
     const goToLanding = () => {
