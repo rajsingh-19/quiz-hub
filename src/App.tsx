@@ -4,6 +4,7 @@ import LandingPage from "./pages/landing/LandingPage";
 import CategoryPage from "./pages/category/CategoryPage";
 import LoginPage from './pages/login/LoginPage';
 import RegisterPage from './pages/register/RegisterPage';
+import NotFound from './pages/notfound/NotFound';
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
         <Route path='/category' element={<CategoryPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
+        {/* Catch all route for undefined paths */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
