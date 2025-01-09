@@ -1,0 +1,42 @@
+.footerContainer {
+    height: 60px;
+    background-color: #374151;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.copyrightContainer {
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: 500;
+}
+.authorContainer {
+    font-size: 18px;
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+}
+.ul {
+    list-style: none;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.ul li {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: #FFFFFF;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.ul li a {
+    color: #FFFFFF;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+}
+.ul li a:hover {
+    transform: translateY(1.3px);
+}
