@@ -32,7 +32,7 @@ export const loginUser = (userData: {
 
 //              get all the quizzes
 export const getAllQuiz = () => {
-    return fetch(`${apiUrl}quiz/allcategory`, {
+    return fetch(`${apiUrl}api/quizzes`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json'
