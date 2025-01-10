@@ -18,7 +18,7 @@ const Footer:React.FC = () => {
   return (
     <div className={`${styles.footerContainer} flex dir-row align-center justify-space-btwn`}>
         {/*         Copyright section       */}
-        <div className={styles.copyrightContainer}><span>&copy;</span>2024 Quiz Hub, Inc. All rights reserved</div>
+        <div className={styles.copyrightContainer}><span>&copy;</span>2025 Quiz Hub, Inc. All rights reserved</div>
         {/*         Author Section          */}
         <div className={`${styles.authorContainer} flex dir-row align-center text-white`}>
           <span>Made with</span>&nbsp;<FcLike />&nbsp;<span>by Raj Singh</span>

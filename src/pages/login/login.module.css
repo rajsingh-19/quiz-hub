@@ -62,6 +62,9 @@
     font-size: 16px;
     margin-top: 5px;
 }
+.submitBtnContainer {
+    margin-bottom: 5px;
+}
 /*              Img Container          */
 .loginImgContainer {
     width: 45%;
@@ -84,4 +87,16 @@
     z-index: 1;
     text-align: center;
     white-space: nowrap;
+}
+
+/*          quizzes btn      */
+.quizzesBtn {
+    top: 50px;
+    left: 50px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: blue;
+    font-size: 18px;
+    font-weight: 500;
 }

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../login/login.module.css";
+import CustomBtn from "../../components/button/CustomBtn";
+import { registerUser } from "../../services";
+import { IoArrowBackOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import lock from "../../assets/lock.svg"; 
@@ -13,11 +16,19 @@ type Errors = {
     checkbox?: String;
 };
 
+//      Define the type of register form data
+interface RegisterFormData {
+    name: string,
+    email: string,
+    mobile: string,
+    password: string
+};
+
 const RegisterPage: React.FC = () => {
     const navigate = useNavigate();
 
     //              useState initializes the form data state with default empty values
-    const [registerFormData, setRegisterFormData] = useState({          
+    const [registerFormData, setRegisterFormData] = React.useState<RegisterFormData>({          
         name: '',
         email: '',
         mobile: '',
@@ -66,7 +77,28 @@ const RegisterPage: React.FC = () => {
         if (!validateForm()) {
             return;
         };
-        console.log(registerFormData);
+
+        try {
+            const res = await registerUser(registerFormData);
+            
+            if(res.status === 201) {
+                setRegisterFormData({
+                    name: '',
+                    email: '',
+                    mobile: '',
+                    password: ''
+                })
+                alert("Registered Success");
+                navigate('/login');
+            } else {
+                const errorData = await res.json();
+                const errorMessage = errorData.message || "An error occured";
+                alert(errorMessage);
+            }
+        } catch (error) {
+            console.log(error);
+            alert(`An Unexpected error occur: ${error}`);
+        }
     };
     
     const passwordVisibility = () => {
@@ -77,9 +109,13 @@ const RegisterPage: React.FC = () => {
         navigate('/login');
     };
 
+    const handleQuizCatgeory = () => {
+        navigate('/category');
+    };
+
     return (
-        <div className="flex dir-row">
-            <div className={`${styles.loginFormContainer} flex dir-col`}>
+        <div className="flex dir-row position-relative">
+            <div className={`${styles.loginFormContainer} flex dir-col align-center justify-center`}>
                 <div className="firstSection">
                     <p className="dm-sans font-wt-700 text-30">Create an account</p>
                     <p className="dm-sans font-wt-500 text-19 text-grayClr">The Ultimate quiz game is here</p>
@@ -107,20 +143,25 @@ const RegisterPage: React.FC = () => {
                         }
                     </div>
                     {errors.password && <p className={styles.errorMessage}>{errors.password}</p>}
-                    <div className="flex dir-row align-center m-t-15">
+                    <div className="flex dir-row align-center m-t-15 m-b-15">
                         <input className={`${styles.checkbox} m-r-5`} type="checkbox" checked={checkboxChecked} onChange={(e) => setCheckboxChecked(e.target.checked)} />
                         <p className="text-grayClr">By creating an account, I agree to our terms of use and privacy policy</p>
                     </div>
                     {errors.checkbox && <p className={styles.errorMessage}>{errors.checkbox}</p>}
-                    <div>
-                        <button type="submit" className="btn outline-none border-none font-wt-700 text-16 m-t-30 cursor-pointer">Create Account</button>
+                    <div className={`${styles.submitBtnContainer} m-t-5`}>
+                        <CustomBtn type={"submit"} className={"btn outline-none border-none font-wt-700 text-16 m-t-30 cursor-pointer"} label={"Create Account"} />
                     </div>
                 </form>
                 <div className={styles.lastLine}>
                     <span className="dm-sans font-wt-500 text-19 text-grayClr">Already have an account?</span>&nbsp;&nbsp;
-                    <button className={`dm-sans text-19 font-wt-500 underline ${styles.signupBtn} border-none cursor-pointer`} onClick={handleLogin}>Login</button>
+                    <button className={`dm-sans text-19 font-wt-500 ${styles.signupBtn} border-none cursor-pointer`} onClick={handleLogin}>Login</button>
                 </div>
             </div>
+            {/*         Quizzes button      */}
+            <button onClick={handleQuizCatgeory} className={`${styles.quizzesBtn} flex justify-center position-absolute`}>
+                <IoArrowBackOutline />
+                <span>Quizzes</span>
+            </button>
         </div>
     )
 };
