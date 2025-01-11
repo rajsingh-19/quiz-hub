@@ -40,8 +40,8 @@ const CategoryPage: React.FC = () => {
             try {
                 const quizRes = await getAllQuiz();
                 const quizzes =  await quizRes.json();
-                const quizDoc = quizzes.quizzes;
-                
+                const quizDoc = quizzes.filteredQuizzes;
+
                 if (quizDoc) {
                     setCategoryArray(quizDoc);
                 };
@@ -59,8 +59,8 @@ const CategoryPage: React.FC = () => {
         if (category === "All") {
             const quizRes = await getAllQuiz();
             const quizzes = await quizRes.json();
-            const quizDoc = quizzes.quizzes;
-            console.log(quizDoc);
+            const quizDoc = quizzes.filteredQuizzes;
+
             setCategoryArray(quizDoc);
             return;
         };
@@ -68,8 +68,8 @@ const CategoryPage: React.FC = () => {
         try {
             const categoryQuiz = await getSubByCategory(category);
             const subjects = await categoryQuiz.json();
-            const quizDoc = subjects.subjects;
-            console.log(quizDoc);
+            const quizDoc = subjects.filteredQuizzes;
+
             setCategoryArray(quizDoc);
         } catch (error) {
             console.error("Error fetching this category", error);
