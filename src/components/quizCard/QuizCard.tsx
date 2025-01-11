@@ -7,13 +7,15 @@ import Button from '@mui/material/Button';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
 
-interface Category {
+interface QuizCardProps {
+    _id:  string,
     subjectName: string,
     imgUrl: string,
-    description: string
+    description: string,
+    handleInstruction: (_id: string) => void        // Function type for handling navigation
 };
 
-const QuizCard: React.FC<Category> = ({ subjectName, imgUrl, description }) => {
+const QuizCard: React.FC<QuizCardProps> = ({ subjectName, imgUrl, description, handleInstruction, _id }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -24,7 +26,7 @@ const QuizCard: React.FC<Category> = ({ subjectName, imgUrl, description }) => {
         </CardContent>
       </CardActionArea>
       <CardActions className='flex justify-center'>
-        <Button className='font-wt-700' size="medium" color="primary">Play</Button>
+        <Button className='font-wt-700' size="medium" color="primary" onClick={() => handleInstruction(_id)}>Play</Button>
       </CardActions>
     </Card>
   );

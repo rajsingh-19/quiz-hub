@@ -16,8 +16,8 @@ function App() {
         <Route path='/category' element={<CategoryPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
-        <Route path='/instruction' element={<InstructionPage />} />
-        <Route path='/quiz' element={<QuizPage />} />
+        <Route path='/instruction/:id' element={<InstructionPage />} />
+        <Route path='/quiz/:id' element={<QuizPage />} />
         {/* Catch all route for undefined paths */}
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -1,0 +1,38 @@
+.heading {
+    font-size: 34px;
+    font-weight: 800;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    letter-spacing: 3px;
+    color: #172554;
+    text-decoration: underline;
+}
+.listContainer {
+    list-style: decimal;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.listContainer li {
+    margin-top: 5px;
+    margin-bottom: 8px;
+    font-size: 20px;
+    color: #4b5563;
+    font-weight: 600;
+}
+.playBtnContainer {
+    margin: 40px 0px 20px 0px;
+}
+.playBtn {
+    font-size: 20px;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #374151;
+}
+.playBtn:hover {
+    background-color: #4b5563;
+}

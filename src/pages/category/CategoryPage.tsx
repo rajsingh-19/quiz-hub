@@ -79,8 +79,8 @@ const CategoryPage: React.FC = () => {
         }
     };
 
-    const handleInstruction = (): void => {
-        navigate('/instruction');
+    const handleInstruction = (_id: string): void => {
+        navigate(`/instruction/${_id}`);
     };
 
     return (
@@ -104,9 +104,9 @@ const CategoryPage: React.FC = () => {
             <div className={styles.categoryContainer}>
                 {
                     categoryArray.length > 0 ? (
-                        categoryArray.map(({ _id,subjectName, imgUrl, description }) => {
+                        categoryArray.map(({ _id, subjectName, imgUrl, description }) => {
                             return (
-                                <QuizCard key={_id} subjectName={subjectName} imgUrl={imgUrl} description={description} />
+                                <QuizCard key={_id} _id={_id} subjectName={subjectName} imgUrl={imgUrl} description={description} handleInstruction={handleInstruction} />
                             )
                         })
                     ) : 
