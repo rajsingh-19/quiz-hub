@@ -7,7 +7,7 @@ import Footer from "../../components/footer/Footer";
 const LandingPage: React.FC = () =>  {
     const navigate = useNavigate();
 
-    const handleCategory = () => {
+    const handleCategory = (): void => {
         navigate('/category');
     };
 

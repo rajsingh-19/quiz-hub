@@ -14,7 +14,7 @@ const links: SocialLink[] = [
   { href: "https://singhrajportfolio.netlify.app/", label: "Portfolio" }
 ];
 
-const Footer:React.FC = () => {
+const Footer:React.FC = (): React.ReactElement => {
   return (
     <div className={`${styles.footerContainer} flex dir-row align-center justify-space-btwn`}>
         {/*         Copyright section       */}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./category.module.css";
 import Navbar from "../../components/nav/Navbar";
 import Footer from "../../components/footer/Footer";
@@ -34,6 +35,8 @@ const list: Filter[] = [
 const CategoryPage: React.FC = () => {
     const [categoryArray, setCategoryArray] = useState<Category[]>([]);
     const [activeFilter, setActiveFilter] = useState<string>("All");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchQuizData = async () => {
@@ -74,6 +77,10 @@ const CategoryPage: React.FC = () => {
         } catch (error) {
             console.error("Error fetching this category", error);
         }
+    };
+
+    const handleInstruction = (): void => {
+        navigate('/instruction');
     };
 
     return (

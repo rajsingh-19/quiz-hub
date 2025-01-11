@@ -90,16 +90,16 @@ const LoginPage: React.FC = () => {
         }
     };
 
-    const passwordVisibility = () => {
+    const passwordVisibility = (): void => {
         setShowPassword((prev) => !prev);
     };
 
     //              function for handle the sign up 
-    const handleRegister = () => {
+    const handleRegister = (): void => {
         navigate('/register');
     };
 
-    const handleQuizCatgeory = () => {
+    const handleQuizCatgeory = (): void => {
         navigate('/category');
     };
 

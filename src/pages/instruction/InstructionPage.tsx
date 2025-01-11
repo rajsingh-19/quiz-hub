@@ -1,13 +1,13 @@
 import React from "react";
 import QuizNav from "../../components/quiznav/QuizNav";
 
-const QuizPage: React.FC = () => {
+const InstructionPage: React.FC = () => {
     return (
         <div>
             <QuizNav />
-            quiz page
+            InstructionPage
         </div>
     )
 };
 
-export default QuizPage;
+export default InstructionPage;

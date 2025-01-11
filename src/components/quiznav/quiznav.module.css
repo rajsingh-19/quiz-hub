@@ -1,0 +1,27 @@
+.quizNavContainer {
+    width: 100%;
+    height: 8vh;
+    background-color: #374151;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.quizHubBtn {
+    width: 130px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.quiz {
+    font-size: 30px;
+    font-weight: 700;
+    font-style: italic;
+    color: #f97316;
+    letter-spacing: 1px;
+}
+.hub {
+    font-weight: 700;
+    font-size: 30px;
+    color: #fafafa;
+}

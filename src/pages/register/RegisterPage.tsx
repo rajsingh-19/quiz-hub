@@ -101,15 +101,15 @@ const RegisterPage: React.FC = () => {
         }
     };
     
-    const passwordVisibility = () => {
+    const passwordVisibility = (): void => {
         setShowPassword((prev) => !prev);
     };
 
-    const handleLogin = () => {
+    const handleLogin = (): void => {
         navigate('/login');
     };
 
-    const handleQuizCatgeory = () => {
+    const handleQuizCatgeory = (): void => {
         navigate('/category');
     };
 
