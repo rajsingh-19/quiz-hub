@@ -1,0 +1,70 @@
+.listContainer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #9ca3af;
+    background-color: #d1d5db;
+}
+.filterListContainer {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 5px 20px;
+}
+.filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 10px;
+    color: #6b7280;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+.filterIcon {
+    color: #6b7280;
+}
+.list {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.categoryBtns {
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+    color: #9ca3af;
+    color: #4b5563;
+    background-color: #f8fafc;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    padding: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.categoryBtns:hover {
+    background-color: #cbd5e1;
+}
+.activeCategory {
+    background-color: #007bff;
+    background-color: #a3a3a3;
+    color: white;
+    font-weight: bold;
+}
+
+/*          card section     */
+.categoryPageContainer {
+    background-color: #e5e7eb;
+}
+.categoryContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    column-gap: 50px;
+    row-gap: 80px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}

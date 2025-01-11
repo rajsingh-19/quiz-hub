@@ -23,8 +23,8 @@ const QuizCard: React.FC<Category> = ({ subjectName, imgUrl, description }) => {
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>{description}</Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">Play</Button>
+      <CardActions className='flex justify-center'>
+        <Button className='font-wt-700' size="medium" color="primary">Play</Button>
       </CardActions>
     </Card>
   );

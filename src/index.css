@@ -108,6 +108,10 @@
 .text-35 {
   font-size: 35px;
 }
+
+.text-center {
+  text-align: center;
+}
 /*      padding and margin     */
 .p-t-10 {
   padding-top: 5px;
@@ -139,6 +143,9 @@
 }
 .m-b-25 {
   margin-bottom: 25px;
+}
+.m-r-2 {
+  margin-right: 3px;
 }
 .m-r-5 {
   margin-right: 5px;

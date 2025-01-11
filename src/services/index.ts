@@ -39,3 +39,14 @@ export const getAllQuiz = () => {
         }
     })
 };
+
+//          Get subjects by category name
+export const getSubByCategory = (category: string):Promise<Response> => {
+    return fetch(`${apiUrl}api/quiz/?category=${category}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+};
+
