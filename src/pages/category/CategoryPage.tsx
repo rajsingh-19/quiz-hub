@@ -118,6 +118,7 @@ const CategoryPage: React.FC = () => {
           categoryArray.map(({ _id, subjectName, imgUrl, description }) => {
             return (
               <>
+              {/* <div key={_id}> */}
                 <QuizCard
                   key={_id}
                   _id={_id}
@@ -125,8 +126,9 @@ const CategoryPage: React.FC = () => {
                   imgUrl={imgUrl}
                   description={description}
                   handleInstruction={handleInstruction}
-                />
-                <Footer />
+                  />
+              {/* </div> */}
+              <Footer />
               </>
             );
           })

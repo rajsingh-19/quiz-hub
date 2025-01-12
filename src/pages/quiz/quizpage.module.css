@@ -2,72 +2,90 @@
     padding: 20px 80px;
     background-color: #d1d5db;
     font-size: 18px;
+    margin-bottom: 25px;
 }
 .quizHeadContainer > p > span {
     font-weight: 600;
 }
+/*      ques and options container   */
+.quesOptionsContainer {
+    height: 600px;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15), 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
 .quesCardContainer {
     width: 800px;
-    margin-top: 40px;
+    padding: 10px;
     margin-bottom: 25px;
     border-radius: 8px;
-    background-color: #f3f4f6;
-    padding: 10px;
 }
 .difficulty {
     font-size: 20px;
     font-weight: 600;
     margin: 5px 10px;
     letter-spacing: 1px;
-    border-bottom: 1px solid gray;
+    border-bottom: 2px solid gray;
 }
 .difficulty > span {
     font-size: 18px;
     font-weight: 500;
-    /* letter-spacing: 1px; */
 }
 .quesContainer {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
+    color: #374151;
     margin: 5px 10px;
 }
-.quesContainer  span {
+.quesContainer span {
     font-size: 20px;
     font-weight: 600;
 }
-
-
-/*      options         */
-
+/*              options         */
 .optionsContainer {
     width: 800px;
     border-radius: 8px;
-    border: 2px solid red;
 }
 .optionsContainer div {
+    width: 95%;
+    height: 60px;
+    border-radius: 10px;
     margin-top: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
 }
 .optionsContainer div input {
-    margin-left: 5px;
-    margin-right: 10px;
-}
-.optionsContainer div label {
-    font-size: 18px;
-    font-weight: 500;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+    background-color: white;
+    border: 3px solid #d1d5db;
+    border-radius: 10px;
     cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
 }
-
 .btnsContainer {
-    display: flex;
-    flex-direction: row;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    bottom: 0px;
 }
 .btnsContainer div {
     margin-left: 5px;
     margin-right: 5px;
+}
+/*      wrong and correct ans        */
+.optionsContainer div input.wrongAns {
+    color: white;
+    background-color: red;
+    border: 3px solid red;
+}
+.optionsContainer div input.correctAns {
+    color: white;
+    background-color: green;
+    border: 3px solid green;
 }
 
