@@ -50,3 +50,13 @@ export const getSubByCategory = (category: string):Promise<Response> => {
     })
 };
 
+//          Get a subject by its id
+export const getSubById = (id: string): Promise<Response> => {
+    return fetch(`${apiUrl}api/quiz/sub/${id}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${localStorage.getItem('token')}`
+        }
+    })
+};

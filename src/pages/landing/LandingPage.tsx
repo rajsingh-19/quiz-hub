@@ -12,7 +12,7 @@ const LandingPage: React.FC = () =>  {
     };
 
     return (
-        <div className="flex dir-col">
+        <div className="flex dir-col position-relative">
             <Navbar />
             {/*           Landing Page Featuring Content Section     */}
             <div className={`${styles.bgImg} flex dir-col align-center`}>

@@ -1,0 +1,73 @@
+.quizHeadContainer {
+    padding: 20px 80px;
+    background-color: #d1d5db;
+    font-size: 18px;
+}
+.quizHeadContainer > p > span {
+    font-weight: 600;
+}
+.quesCardContainer {
+    width: 800px;
+    margin-top: 40px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    background-color: #f3f4f6;
+    padding: 10px;
+}
+.difficulty {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 5px 10px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid gray;
+}
+.difficulty > span {
+    font-size: 18px;
+    font-weight: 500;
+    /* letter-spacing: 1px; */
+}
+.quesContainer {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 5px 10px;
+}
+.quesContainer  span {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+/*      options         */
+
+.optionsContainer {
+    width: 800px;
+    border-radius: 8px;
+    border: 2px solid red;
+}
+.optionsContainer div {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+}
+.optionsContainer div input {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+.optionsContainer div label {
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btnsContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.btnsContainer div {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+

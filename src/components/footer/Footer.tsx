@@ -16,7 +16,7 @@ const links: SocialLink[] = [
 
 const Footer:React.FC = (): React.ReactElement => {
   return (
-    <div className={`${styles.footerContainer} flex dir-row align-center justify-space-btwn`}>
+    <div className={`${styles.footerContainer} flex dir-row align-center justify-space-btwn position-absolute`}>
         {/*         Copyright section       */}
         <div className={styles.copyrightContainer}><span>&copy;</span>2025 Quiz Hub, Inc. All rights reserved</div>
         {/*         Author Section          */}
