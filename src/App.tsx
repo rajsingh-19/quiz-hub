@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import LandingPage from "./pages/landing/LandingPage";
 import CategoryPage from "./pages/category/CategoryPage";
 import LoginPage from './pages/login/LoginPage';
@@ -16,8 +17,8 @@ function App() {
         <Route path='/category' element={<CategoryPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
-        <Route path='/instruction/:id' element={<InstructionPage />} />
-        <Route path='/quiz/:id' element={<QuizPage />} />
+        <Route path='/instruction/:id' element={<ProtectedRoute><InstructionPage /></ProtectedRoute>} />
+        <Route path='/quiz/:id' element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
         {/* Catch all route for undefined paths */}
         <Route path="*" element={<NotFound />} />
       </Routes>

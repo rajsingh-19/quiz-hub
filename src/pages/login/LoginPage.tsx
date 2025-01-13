@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import CustomBtn from "../../components/button/CustomBtn";
 import { loginUser } from "../../services";
+import { useAuth } from "../../context/userContext";  // Import useAuth hook
 import { IoArrowBackOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
@@ -21,6 +22,7 @@ interface LoginFormData {
 
 const LoginPage: React.FC = () => {
     const navigate = useNavigate();
+    const { setToken } = useAuth();  // Use setToken from AuthContext
     //               useState initializes the login data state with default empty values
     const [loginFormData, setLoginFormData] = React.useState<LoginFormData>({
         email: '',
@@ -69,14 +71,15 @@ const LoginPage: React.FC = () => {
             
             if(res.status === 200)  {
                 const data = await res.json();
-                // console.log(data);
-                localStorage.setItem('token', data.token);
+                // Set the token using the AuthContext's setToken method
+                setToken(data.token);  // Store token in the global context
 
                 setLoginFormData({
                     email: "",
                     password: ""
                 });
 
+                setToken(data.token);
                 alert("login success");
                 navigate('/category');
             } else {
@@ -102,7 +105,7 @@ const LoginPage: React.FC = () => {
     const handleQuizCatgeory = (): void => {
         navigate('/category');
     };
-
+    
     return (
         <div className={`${styles.loginFormContainer} flex dir-col justify-center align-center position-relative`}>
             <div className=" flex dir-col align-center">

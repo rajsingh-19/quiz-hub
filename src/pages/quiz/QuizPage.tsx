@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./quizpage.module.css";
+import { useAuth } from "../../context/userContext";
 import QuizNav from "../../components/quiznav/QuizNav";
 import CustomBtn from "../../components/button/CustomBtn";
 import Loader from "../../components/loader/Loader";
@@ -35,17 +36,19 @@ const QuizPage: React.FC = () => {
     const [userAnswer, setUserAnswer] = useState<string | null>(null);
     const [answered, setAnswered] = useState(false);
     const navigate = useNavigate();
+    const { token } = useAuth();
     
     useEffect(() => {
-        const fetchSubQuiz = async (id: string) => {
+        if (!id || !token) return;
+
+        const fetchSubQuiz = async (id: string, token: string) => {
             try {
-                const response = await getSubById(id);
+                const response = await getSubById(id, token);
                 const subData = await response.json();
 
                 if(response.status === 200) {
                     setQuizData(subData);
                     setLoading(false);
-                    console.log(subData);
                     return;
                 } else {
                     console.log(subData.message || "Something went wrong.");
@@ -55,22 +58,15 @@ const QuizPage: React.FC = () => {
             }
         };
 
-        fetchSubQuiz(id as string);
-    }, [id]);
+        fetchSubQuiz(id, token);
+    }, [id, token]);
 
-    // Log the updated score whenever it changes
-    useEffect(() => {
-        console.log("Current score:", score);
-    }, [score]);
-        
     // Handle next question
     const handleNext = () => {
         if (quizData && currentQuestionIndex < quizData.quesAns.length) {
-            console.log("Before updating score:", score);
             if (userAnswer === quizData.quesAns[currentQuestionIndex].correctOption) {
                 setScore((prevScore) => {
                     const updatedScore = prevScore + 10;  // Calculate new score
-                    console.log("Updated score within setScore:", updatedScore);  // Log inside the updater function
                     return updatedScore;
                 })
             };
