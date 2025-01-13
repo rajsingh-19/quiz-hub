@@ -22,7 +22,7 @@ interface LoginFormData {
 
 const LoginPage: React.FC = () => {
     const navigate = useNavigate();
-    const { setToken } = useAuth();  // Use setToken from AuthContext
+    const { setToken, setUserId } = useAuth();  // Use setToken from AuthContext
     //               useState initializes the login data state with default empty values
     const [loginFormData, setLoginFormData] = React.useState<LoginFormData>({
         email: '',
@@ -71,15 +71,16 @@ const LoginPage: React.FC = () => {
             
             if(res.status === 200)  {
                 const data = await res.json();
-                // Set the token using the AuthContext's setToken method
-                setToken(data.token);  // Store token in the global context
+                const userToken = data.result.token;
+                const userID = data.result.userId;
 
                 setLoginFormData({
                     email: "",
                     password: ""
                 });
 
-                setToken(data.token);
+                setToken(userToken);            // Store token in the global context
+                setUserId(userID);
                 alert("login success");
                 navigate('/category');
             } else {
