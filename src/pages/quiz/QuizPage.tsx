@@ -110,12 +110,6 @@ const QuizPage: React.FC = () => {
         // Directly calculate totalRightAns based on the current score
         const calculatedTotalRightAns = score / 10;
         const calculatedTotalWrongAns = (quizData?.quesAns.length || 0) - calculatedTotalRightAns;
-
-        // Log key values to debug
-        console.log("Quiz ID:", quizId);
-        console.log("Score:", score);
-        console.log("Total Right Answers:", calculatedTotalRightAns);
-        console.log("Total Wrong Answers:", calculatedTotalWrongAns);
         
         // Call the createScore API with try-catch
         try {
