@@ -7,6 +7,7 @@ import LoginPage from './pages/login/LoginPage';
 import RegisterPage from './pages/register/RegisterPage';
 import InstructionPage from './pages/instruction/InstructionPage';
 import QuizPage from './pages/quiz/QuizPage';
+import ScorePage from './pages/score/ScorePage';
 import NotFound from './pages/notfound/NotFound';
 
 function App() {
@@ -17,8 +18,9 @@ function App() {
         <Route path='/category' element={<CategoryPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
-        <Route path='/instruction/:id' element={<ProtectedRoute><InstructionPage /></ProtectedRoute>} />
-        <Route path='/quiz/:id' element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+        <Route path='/instruction/:quizId' element={<ProtectedRoute><InstructionPage /></ProtectedRoute>} />
+        <Route path='/quiz/:quizId' element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+        <Route path='/score/:quizId' element={<ProtectedRoute><ScorePage /></ProtectedRoute>} />
         {/* Catch all route for undefined paths */}
         <Route path="*" element={<NotFound />} />
       </Routes>

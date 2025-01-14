@@ -4,7 +4,7 @@ import styles from "./instruction.module.css";
 import QuizNav from "../../components/quiznav/QuizNav";
 
 const InstructionPage: React.FC = () => {
-    const { id } = useParams();
+    const { quizId } = useParams();
     const navigate = useNavigate();
 
     //  Defining the type of description
@@ -23,8 +23,8 @@ const InstructionPage: React.FC = () => {
     ];
 
     //      define the id type, although it shouldn't be undefined but for surety undefined is also there 
-    const handleQuiz = (id: string | undefined): void => {
-        navigate(`/quiz/${id}`);
+    const handleQuiz = (quizId: string | undefined): void => {
+        navigate(`/quiz/${quizId}`);
     };
 
     return (
@@ -42,7 +42,7 @@ const InstructionPage: React.FC = () => {
                     </ul>
                 </div>
                 <div className={styles.playBtnContainer}>
-                    <button onClick={() => handleQuiz(id)} className={styles.playBtn}>Play</button>
+                    <button onClick={() => handleQuiz(quizId)} className={styles.playBtn}>Play</button>
                 </div>
             </div>
         </div>

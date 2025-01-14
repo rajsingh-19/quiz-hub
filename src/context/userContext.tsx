@@ -14,7 +14,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 //  Creating a provider
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
-  const [userId, setUserId] = useState<string | null>(localStorage.getItem('id'));
+  const [userId, setUserId] = useState<string | null>(localStorage.getItem('userId'));
 
   // Function to update the token and sync with localStorage
   const updateToken = (newToken: string | null) => {
@@ -30,12 +30,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const updateUserId = (newUserId: string | null) => {
     setUserId(newUserId);
     if (newUserId) {
-      localStorage.setItem('id', newUserId);
+      localStorage.setItem('userId', newUserId);
     } else {
-      localStorage.removeItem('id');
+      localStorage.removeItem('userId');
     }
   };
-
+    
   return (
     <AuthContext.Provider value={{ token, setToken: updateToken, userId, setUserId: updateUserId }}>
       {children}

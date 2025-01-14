@@ -39,6 +39,7 @@ const CategoryPage: React.FC = () => {
 
   const navigate = useNavigate();
 
+  //  Fetching the quizzes data
   useEffect(() => {
     const fetchQuizData = async () => {
       try {
@@ -59,6 +60,7 @@ const CategoryPage: React.FC = () => {
     fetchQuizData();
   }, []);
 
+  //    filter function
   const handleCategories = async (category: string) => {
     setActiveFilter(category);
 
@@ -82,8 +84,10 @@ const CategoryPage: React.FC = () => {
     }
   };
 
+  //    go to instruction page function
   const handleInstruction = (_id: string): void => {
-    navigate(`/instruction/${_id}`);
+    const quizId = _id;                     // change _id to quizId for convenience
+    navigate(`/instruction/${quizId}`);
   };
 
   return (

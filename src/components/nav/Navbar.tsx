@@ -6,10 +6,12 @@ import { useAuth } from "../../context/userContext";
 const Navbar: React.FC = (): React.ReactElement => {
     const navigate = useNavigate();
     const { token, setToken } = useAuth();
+    const { setUserId } = useAuth();
 
     //     Log out function
     const handleLogout = () => {
         setToken(null);
+        setUserId(null);
     };
 
     //      landing page navigation function

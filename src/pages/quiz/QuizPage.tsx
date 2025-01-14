@@ -5,13 +5,14 @@ import { useAuth } from "../../context/userContext";
 import QuizNav from "../../components/quiznav/QuizNav";
 import CustomBtn from "../../components/button/CustomBtn";
 import Loader from "../../components/loader/Loader";
-import { getSubById } from "../../services";
+import { getSubById, createScore } from "../../services";
 import { RxLapTimer } from "react-icons/rx";
 
 //  Defining the option type
 interface Option {
     option: string;
-}
+};
+
 //      Defining the types of ques, opt, difficulty and id
 interface QuizQuestion {
     _id: string;
@@ -19,31 +20,32 @@ interface QuizQuestion {
     options: Option[];
     difficulty: string;
     correctOption: string; 
-}
+};
 
 //      Defining the type of subject and ques & ans
 interface QuizData {
     subject: string;
     quesAns: QuizQuestion[];
-}
+};
 
 const QuizPage: React.FC = () => {
-    const { id } = useParams();
+    const { quizId } = useParams();
+    const { token, userId } = useAuth();
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [quizData, setQuizData] = useState<QuizData | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [userAnswer, setUserAnswer] = useState<string | null>(null);
     const [answered, setAnswered] = useState(false);
-    const navigate = useNavigate();
-    const { token } = useAuth();
     
+    //      Fetching the subject quizzes by its id
     useEffect(() => {
-        if (!id || !token) return;
+        if (!quizId || !token) return;
 
-        const fetchSubQuiz = async (id: string, token: string) => {
+        const fetchSubQuiz = async (quizId: string, token: string) => {
             try {
-                const response = await getSubById(id, token);
+                const response = await getSubById(quizId, token);
                 const subData = await response.json();
 
                 if(response.status === 200) {
@@ -58,8 +60,8 @@ const QuizPage: React.FC = () => {
             }
         };
 
-        fetchSubQuiz(id, token);
-    }, [id, token]);
+        fetchSubQuiz(quizId, token);
+    }, [quizId, token]);
 
     // Handle next question
     const handleNext = () => {
@@ -95,13 +97,33 @@ const QuizPage: React.FC = () => {
     };
 
     // Handle submit action
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        if (!quizId || !userId || !token) {
+            console.error("Required parameters are missing.");
+            return;
+        };
+
         if (quizData && userAnswer === quizData.quesAns[currentQuestionIndex].correctOption) {
             setScore((prevScore) => prevScore + 10);  // Update score on submit
-        }
-        // Logic for submitting the quiz, such as navigating to the results page
-        console.log("Quiz submitted!");
-        // Example: navigate('/results');
+        };
+
+        // Directly calculate totalRightAns based on the current score
+        const calculatedTotalRightAns = score / 10;
+        const calculatedTotalWrongAns = (quizData?.quesAns.length || 0) - calculatedTotalRightAns;
+
+        // Log key values to debug
+        console.log("Quiz ID:", quizId);
+        console.log("Score:", score);
+        console.log("Total Right Answers:", calculatedTotalRightAns);
+        console.log("Total Wrong Answers:", calculatedTotalWrongAns);
+        
+        // Call the createScore API with try-catch
+        try {
+            await createScore(quizId, userId, token, score, calculatedTotalRightAns, calculatedTotalWrongAns);
+            navigate(`/score/${quizId}`);
+        } catch (error) {
+            console.error("Error submitting score:", error);
+        }        
     };
 
     return (
