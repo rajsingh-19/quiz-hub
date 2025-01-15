@@ -62,8 +62,8 @@ export const getSubById = (quizId: string, token: string): Promise<Response> => 
 };
 
 //          Create the score and attach to the user by it's id
-export const createScore = (quizId: string, userId: string, token: string, score: number, rightAns: number, wrongAns: number): Promise<Response> => {
-    return fetch(`${apiUrl}api/score/${quizId}`, {
+export const createScore = (subId: string, userId: string, token: string, score: number, rightAns: number, wrongAns: number): Promise<Response> => {
+    return fetch(`${apiUrl}api/score/${subId}`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -72,3 +72,14 @@ export const createScore = (quizId: string, userId: string, token: string, score
         body: JSON.stringify({ userId, score, rightAns, wrongAns })
     })
 };
+
+//          Get Quiz by user id
+export const getScoreByUserId = (quizId: string, token: string) => {
+    return fetch(`${apiUrl}api/score/${quizId}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}

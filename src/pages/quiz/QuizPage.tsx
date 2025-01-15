@@ -29,7 +29,7 @@ interface QuizData {
 };
 
 const QuizPage: React.FC = () => {
-    const { quizId } = useParams();
+    const { subId } = useParams();
     const { token, userId } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
@@ -41,7 +41,7 @@ const QuizPage: React.FC = () => {
     
     //      Fetching the subject quizzes by its id
     useEffect(() => {
-        if (!quizId || !token) return;
+        if (!subId || !token) return;
 
         const fetchSubQuiz = async (quizId: string, token: string) => {
             try {
@@ -60,8 +60,8 @@ const QuizPage: React.FC = () => {
             }
         };
 
-        fetchSubQuiz(quizId, token);
-    }, [quizId, token]);
+        fetchSubQuiz(subId, token);
+    }, [subId, token]);
 
     // Handle next question
     const handleNext = () => {
@@ -98,7 +98,7 @@ const QuizPage: React.FC = () => {
 
     // Handle submit action
     const handleSubmit = async () => {
-        if (!quizId || !userId || !token) {
+        if (!subId || !userId || !token) {
             console.error("Required parameters are missing.");
             return;
         };
@@ -113,8 +113,12 @@ const QuizPage: React.FC = () => {
         
         // Call the createScore API with try-catch
         try {
-            await createScore(quizId, userId, token, score, calculatedTotalRightAns, calculatedTotalWrongAns);
-            navigate(`/score/${quizId}`);
+            const res = await createScore(subId, userId, token, score, calculatedTotalRightAns, calculatedTotalWrongAns);
+            const result = await res.json(); 
+            const quizId = result.newScore._id;
+
+            console.log(quizId);
+            navigate(`/score/${subId}`);
         } catch (error) {
             console.error("Error submitting score:", error);
         }        

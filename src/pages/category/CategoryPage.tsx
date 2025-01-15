@@ -86,8 +86,8 @@ const CategoryPage: React.FC = () => {
 
   //    go to instruction page function
   const handleInstruction = (_id: string): void => {
-    const quizId = _id;                     // change _id to quizId for convenience
-    navigate(`/instruction/${quizId}`);
+    const subId = _id;                     // change _id to quizId for convenience
+    navigate(`/instruction/${subId}`);
   };
 
   return (

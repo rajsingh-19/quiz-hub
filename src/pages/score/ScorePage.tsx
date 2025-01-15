@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../../context/userContext";
 import PieAnimation from "../../components/pieChart/PieAnimation";
 import styles from "./score.module.css";
+import { getScoreByUserId } from "../../services/index";
 import Loader from "../../components/loader/Loader";
 import Navbar from "../../components/nav/Navbar";
 import { GrAnalytics } from "react-icons/gr";
@@ -9,16 +11,39 @@ import { GrScorecard } from "react-icons/gr";
 
 const ScorePage: React.FC = () => {
     const { quizId } = useParams();
-    const [scoreData, setScoreData] = React.useState<boolean>(true);
+    const { userId, token } = useAuth();
+    const [loading, setLoading] = React.useState<boolean>(false);
+    // const
 
-    console.log(quizId);
+    useEffect(() => {
+        if (!userId || !token) return;
+
+        // const fetchScoreByUserId = async () => {
+        //     try {
+        //         const res = await getScoreByUserId(userId, token);
+        //         const resData = await res.json();
+        //         if(res.status === 200) {
+        //             console.log(resData);
+        //         } else {
+        //             console.log(resData.message || "Something went wrong.");
+        //         }
+        //     } catch (error) {
+        //         console.error("Error fetching this subject", error);
+        //     }
+        // };
+        // fetchScoreByUserId();
+        // console.log(userId);
+        // console.log(quizId);
+        // console.log(token);
+    }, []);
 
     return (
         <div className="flex dir-col">
             <Navbar />
             {
-                scoreData ? (
-                    <div className={`${styles.scoreSection} flex dir-col align-center`}>
+                loading ? 
+                    ( <Loader /> ) : 
+                    (<div className={`${styles.scoreSection} flex dir-col align-center`}>
                         <div className={`${styles.scoreContainer} flex dir-row`}>
                             <div className={`${styles.chartContainer} flex dir-col align-center`}>
                                 <div className={`${styles.scoreHeading} flex dir-row justify-center align-center`}>
@@ -44,8 +69,6 @@ const ScorePage: React.FC = () => {
                             <button className={`${styles.rankBtn} border-none outline-none cursor-pointer`}>See Rank</button>
                         </div>
                     </div>
-                ) : (
-                    <Loader />
                 )
             }
         </div>
