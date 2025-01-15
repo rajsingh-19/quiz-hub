@@ -86,14 +86,12 @@ const CategoryPage: React.FC = () => {
 
   //    go to instruction page function
   const handleInstruction = (_id: string): void => {
-    const subId = _id;                     // change _id to quizId for convenience
+    const subId = _id; // change _id to quizId for convenience
     navigate(`/instruction/${subId}`);
   };
 
   return (
-    <div
-      className={`${styles.categoryPageContainer} flex dir-col position-relative`}
-    >
+    <div className={`${styles.categoryPageContainer} flex dir-col position-relative`} >
       <Navbar />
       {/*         filter container     */}
       <div className={styles.listContainer}>
@@ -104,46 +102,29 @@ const CategoryPage: React.FC = () => {
           </li>
           {list.map(({ label }, index) => (
             <li key={index} className={styles.list}>
-              <button
-                onClick={() => handleCategories(label)}
-                className={`${styles.categoryBtns}  ${
-                  activeFilter === label ? styles.activeCategory : ""
-                }`}
-              >
+              <button onClick={() => handleCategories(label)} className={`${styles.categoryBtns}  ${activeFilter === label ? styles.activeCategory : "" }`} >
                 {label}
               </button>
             </li>
           ))}
         </ul>
       </div>
-      <div
-        className={dataloaded ? styles.categoryLoadedContainer : styles.categoryContainer}>
+      {/*       Quiz Card Section    */}
+      <div className={dataloaded ? styles.categoryLoadedContainer : styles.categoryContainer}>
         {categoryArray.length > 0 ? (
           categoryArray.map(({ _id, subjectName, imgUrl, description }) => {
             return (
-              <>
-              {/* <div key={_id}> */}
-                <QuizCard
-                  key={_id}
-                  _id={_id}
-                  subjectName={subjectName}
-                  imgUrl={imgUrl}
-                  description={description}
-                  handleInstruction={handleInstruction}
-                  />
-              {/* </div> */}
-              <Footer />
-              </>
+              <div key={_id}>
+                <QuizCard _id={_id} subjectName={subjectName} imgUrl={imgUrl} description={description} handleInstruction={handleInstruction} />
+              </div>
             );
           })
         ) : (
-          <>
-            <Loader />
-            <div className={styles.footerContainer}>
-              <Footer />
-            </div>
-          </>
+          <Loader />
         )}
+        <div className={styles.footerContainer}>
+          <Footer />
+        </div>
       </div>
     </div>
   );
