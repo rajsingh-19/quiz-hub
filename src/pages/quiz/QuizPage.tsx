@@ -34,7 +34,7 @@ const QuizPage: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [quizData, setQuizData] = useState<QuizData | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState<number>(0);
     const [userAnswer, setUserAnswer] = useState<string | null>(null);
     const [answered, setAnswered] = useState<boolean>(false);
 
