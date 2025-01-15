@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/userContext";
 import PieAnimation from "../../components/pieChart/PieAnimation";
 import styles from "./score.module.css";
@@ -14,11 +14,13 @@ interface ScoreDetails {
     score: number;
     rightAns: number;
     wrongAns: number;
+    subId: string;
 };
 
 const ScorePage: React.FC = () => {
     const { quizId } = useParams();
     const { token } = useAuth();
+    const navigate = useNavigate();
     const [loading, setLoading] = React.useState<boolean>(true);
     const [scoreDetails, setScoreDetails] = useState<ScoreDetails>();
     const [percentages, setPercentages] = useState<{ rightPercentage: number; wrongPercentage: number }>({
@@ -55,6 +57,11 @@ const ScorePage: React.FC = () => {
         fetchScoreByQuizId();
     }, []);
 
+    //      funtion for go to rank page 
+    const handleRank = (subId: string) => {
+        navigate(`/rank/${subId}`);
+    };
+
     return (
         <div className="flex dir-col">
             <Navbar />
@@ -85,7 +92,7 @@ const ScorePage: React.FC = () => {
                         {/*             rank button container        */}
                         <div className={`${styles.rankBtnContainer} flex dir-col align-center`}>
                             <p>Know Your Rank Among Other Players</p>
-                            <button className={`${styles.rankBtn} border-none outline-none cursor-pointer`}>See Rank</button>
+                            <button onClick={() => handleRank(scoreDetails.subId)} className={`${styles.rankBtn} border-none outline-none cursor-pointer`}>See Rank</button>
                         </div>
                     </div>)
                 )

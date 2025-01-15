@@ -6,7 +6,6 @@ import QuizNav from "../../components/quiznav/QuizNav";
 import CustomBtn from "../../components/button/CustomBtn";
 import Loader from "../../components/loader/Loader";
 import { getSubById, createScore } from "../../services";
-import { RxLapTimer } from "react-icons/rx";
 
 //  Defining the option type
 interface Option {
@@ -38,7 +37,7 @@ const QuizPage: React.FC = () => {
     const [score, setScore] = useState(0);
     const [userAnswer, setUserAnswer] = useState<string | null>(null);
     const [answered, setAnswered] = useState<boolean>(false);
-    
+
     //      Fetching the subject quizzes by its id
     useEffect(() => {
         if (!subId || !token) return;
@@ -98,27 +97,30 @@ const QuizPage: React.FC = () => {
 
     // Handle submit action
     const handleSubmit = async () => {
+        console.log(score);
         if (!subId || !userId || !token) {
             console.error("Required parameters are missing.");
             return;
         };
 
+        // Add the last question's correctness to the score
+        let finalScore = score;
         if (quizData && userAnswer === quizData.quesAns[currentQuestionIndex].correctOption) {
-            setScore((prevScore) => prevScore + 10);  // Update score on submit
+            finalScore += 10; // Add 10 points for the last question if correct
         };
 
         // Directly calculate totalRightAns based on the current score
-        const calculatedTotalRightAns = score / 10;
+        const calculatedTotalRightAns = finalScore / 10;
         const calculatedTotalWrongAns = (quizData?.quesAns.length || 0) - calculatedTotalRightAns;
         
         // Call the createScore API with try-catch
         try {
+            let score = finalScore;
             const res = await createScore(subId, userId, token, score, calculatedTotalRightAns, calculatedTotalWrongAns);
             const result = await res.json(); 
             const quizId = result.newScore._id;
 
-            console.log(quizId);
-            navigate(`/score/${quizId}`);
+            navigate(`/score/${quizId}`); 
         } catch (error) {
             console.error("Error submitting score:", error);
         }        
@@ -136,7 +138,6 @@ const QuizPage: React.FC = () => {
                             {/*         subject and timer container       */}
                             <div className={`${styles.quizHeadContainer} flex dir-row justify-space-btwn`}>
                                 <p><span>Subject:</span>&nbsp;{quizData.subject}</p>
-                                <p className="flex dir-row align-center"><span>Timer</span>&nbsp;<RxLapTimer /></p>
                             </div>
                             {/*             question and options container       */}
                             {quizData.quesAns.length > 0 && (

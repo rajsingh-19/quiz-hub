@@ -74,8 +74,19 @@ export const createScore = (subId: string, userId: string, token: string, score:
 };
 
 //          Get Quiz by user id
-export const getScoreByQuizId = (quizId: string, token: string) => {
+export const getScoreByQuizId = (quizId: string, token: string): Promise<Response> => {
     return fetch(`${apiUrl}api/score/${quizId}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+};
+
+//      Get All Scores by sub id
+export const getAllScores = (subId: string, token: string): Promise<Response> => {
+    return fetch(`${apiUrl}api/scores/sub/${subId}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
