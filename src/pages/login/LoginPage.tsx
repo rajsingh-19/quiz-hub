@@ -28,7 +28,7 @@ const LoginPage: React.FC = () => {
         email: '',
         password: ''
     });
-    const [showPassword, setShowPassword] = useState(true);
+    const [showPassword, setShowPassword] = useState<boolean>(true);
     const [errors, setErrors] = useState<Errors>({});           //          states for handling the form errors
     
     //      function for validating the form inputs by using regex

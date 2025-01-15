@@ -32,12 +32,12 @@ const QuizPage: React.FC = () => {
     const { subId } = useParams();
     const { token, userId } = useAuth();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<boolean>(true);
     const [quizData, setQuizData] = useState<QuizData | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [userAnswer, setUserAnswer] = useState<string | null>(null);
-    const [answered, setAnswered] = useState(false);
+    const [answered, setAnswered] = useState<boolean>(false);
     
     //      Fetching the subject quizzes by its id
     useEffect(() => {
@@ -118,7 +118,7 @@ const QuizPage: React.FC = () => {
             const quizId = result.newScore._id;
 
             console.log(quizId);
-            navigate(`/score/${subId}`);
+            navigate(`/score/${quizId}`);
         } catch (error) {
             console.error("Error submitting score:", error);
         }        

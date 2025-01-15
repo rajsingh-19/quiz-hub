@@ -74,7 +74,7 @@ export const createScore = (subId: string, userId: string, token: string, score:
 };
 
 //          Get Quiz by user id
-export const getScoreByUserId = (quizId: string, token: string) => {
+export const getScoreByQuizId = (quizId: string, token: string) => {
     return fetch(`${apiUrl}api/score/${quizId}`, {
         method: "GET",
         headers: {
@@ -82,4 +82,4 @@ export const getScoreByUserId = (quizId: string, token: string) => {
             'Authorization': `Bearer ${token}`
         }
     })
-}
+};

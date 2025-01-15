@@ -35,8 +35,8 @@ const RegisterPage: React.FC = () => {
         password: ''
     });
 
-    const [showPassword, setShowPassword] = useState(true);
-    const [checkboxChecked, setCheckboxChecked] = useState(false);
+    const [showPassword, setShowPassword] = useState<boolean>(true);
+    const [checkboxChecked, setCheckboxChecked] = useState<boolean>(false);
 
     //          states for handling the form errors
     const [errors, setErrors] = useState<Errors>({});
