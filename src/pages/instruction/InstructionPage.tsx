@@ -15,7 +15,7 @@ const InstructionPage: React.FC = () => {
     //  Defining the type of list and its description
     const list: Rules[] = [
         { description: "All the questions are of MCQ type." },
-        { description: "You have only 30 seconds to answer each question." },
+        { description: "Although there is no time limit, please be active and respond within 30 seconds." },
         { description: "You must complete all 10 questions to see your result and compare yourself with other candidates." },
         { description: "You need to mark your answer and click the 'Next' button. Click the 'Submit' button on the last question to submit your responses." },
         { description: "If you want to quit the quiz, click the 'Quit' button." },
