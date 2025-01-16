@@ -7,6 +7,7 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import lock from "../../assets/lock.svg"; 
+import { toast } from 'react-toastify';
 
 type Errors = {
     name?: String;
@@ -88,16 +89,16 @@ const RegisterPage: React.FC = () => {
                     mobile: '',
                     password: ''
                 })
-                alert("Registered Success");
+                toast.success("Registered Success");
                 navigate('/login');
             } else {
                 const errorData = await res.json();
                 const errorMessage = errorData.message || "An error occured";
-                alert(errorMessage);
+                toast.error(errorMessage);
             }
         } catch (error) {
             console.log(error);
-            alert(`An Unexpected error occur: ${error}`);
+            toast.error(`An Unexpected error occur: ${error}`);
         }
     };
     

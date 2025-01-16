@@ -6,6 +6,7 @@ import QuizNav from "../../components/quiznav/QuizNav";
 import CustomBtn from "../../components/button/CustomBtn";
 import Loader from "../../components/loader/Loader";
 import { getSubById, createScore } from "../../services";
+import { toast } from "react-toastify";
 
 //  Defining the option type
 interface Option {
@@ -33,7 +34,7 @@ const QuizPage: React.FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState<boolean>(true);
     const [quizData, setQuizData] = useState<QuizData | null>(null);
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [score, setScore] = useState<number>(0);
     const [userAnswer, setUserAnswer] = useState<string | null>(null);
     const [answered, setAnswered] = useState<boolean>(false);
@@ -97,7 +98,6 @@ const QuizPage: React.FC = () => {
 
     // Handle submit action
     const handleSubmit = async () => {
-        console.log(score);
         if (!subId || !userId || !token) {
             console.error("Required parameters are missing.");
             return;
@@ -116,10 +116,14 @@ const QuizPage: React.FC = () => {
         // Call the createScore API with try-catch
         try {
             let score = finalScore;
-            const res = await createScore(subId, userId, token, score, calculatedTotalRightAns, calculatedTotalWrongAns);
-            const result = await res.json(); 
+            let rightAns = calculatedTotalRightAns;
+            let wrongAns = calculatedTotalWrongAns;
+
+            const res = await createScore(subId, userId, token, score, rightAns, wrongAns);
+            const result = await res.json();
             const quizId = result.newScore._id;
 
+            toast.success("Quiz Submitted");
             navigate(`/score/${quizId}`); 
         } catch (error) {
             console.error("Error submitting score:", error);

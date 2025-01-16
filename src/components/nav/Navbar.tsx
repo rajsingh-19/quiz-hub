@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./nav.module.css";
 import { useAuth } from "../../context/userContext";
+import { toast } from 'react-toastify';
 
 const Navbar: React.FC = (): React.ReactElement => {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ const Navbar: React.FC = (): React.ReactElement => {
 
     //     Log out function
     const handleLogout = () => {
+        toast.success("Logout successfully");
         setToken(null);
         setUserId(null);
     };
