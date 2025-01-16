@@ -6,6 +6,7 @@ import QuizNav from "../../components/quiznav/QuizNav";
 import CustomBtn from "../../components/button/CustomBtn";
 import Loader from "../../components/loader/Loader";
 import { getSubById, createScore } from "../../services";
+import { RxLapTimer } from "react-icons/rx";
 import { toast } from "react-toastify";
 
 //  Defining the option type
@@ -38,6 +39,8 @@ const QuizPage: React.FC = () => {
     const [score, setScore] = useState<number>(0);
     const [userAnswer, setUserAnswer] = useState<string | null>(null);
     const [answered, setAnswered] = useState<boolean>(false);
+    const [timer, setTimer] = useState<number>(15); // Timer state
+    const [timerExpired, setTimerExpired] = useState<boolean>(false);
 
     //      Fetching the subject quizzes by its id
     useEffect(() => {
@@ -63,6 +66,36 @@ const QuizPage: React.FC = () => {
         fetchSubQuiz(subId, token);
     }, [subId, token]);
 
+    // Timer logic
+    useEffect(() => {
+        if (timer > 0) {
+            const interval = setInterval(() => {
+                setTimer((prevTimer) => prevTimer - 1);
+            }, 1000);
+
+            return () => clearInterval(interval); // Cleanup interval on component unmount
+        } else {
+            setTimerExpired(true); // Timer expired
+        }
+    }, [timer]);
+
+    // Handle when the timer expires
+    useEffect(() => {
+        if (timerExpired) {
+            if (currentQuestionIndex < (quizData?.quesAns.length || 0) - 1) {
+                handleNext();
+            } else {
+                handleSubmit();
+            }
+        }
+    }, [timerExpired]);
+
+    // Reset timer on next question or submit
+    const resetTimer = () => {
+        setTimer(15); // Reset timer to 15 seconds
+        setTimerExpired(false);
+    };
+
     // Handle next question
     const handleNext = () => {
         if (quizData && currentQuestionIndex < quizData.quesAns.length) {
@@ -77,6 +110,8 @@ const QuizPage: React.FC = () => {
                 setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
                 setUserAnswer(null);
                 setAnswered(false);
+
+                resetTimer(); // Reset the timer
             } else {
                 console.log("Final question reached. You can submit or show results.");
             }
@@ -108,17 +143,17 @@ const QuizPage: React.FC = () => {
         if (quizData && userAnswer === quizData.quesAns[currentQuestionIndex].correctOption) {
             finalScore += 10; // Add 10 points for the last question if correct
         };
-
+        
         // Directly calculate totalRightAns based on the current score
         const calculatedTotalRightAns = finalScore / 10;
         const calculatedTotalWrongAns = (quizData?.quesAns.length || 0) - calculatedTotalRightAns;
         
+        let rightAns = calculatedTotalRightAns;
+        let wrongAns = calculatedTotalWrongAns;
+        
         // Call the createScore API with try-catch
         try {
             let score = finalScore;
-            let rightAns = calculatedTotalRightAns;
-            let wrongAns = calculatedTotalWrongAns;
-
             const res = await createScore(subId, userId, token, score, rightAns, wrongAns);
             const result = await res.json();
             const quizId = result.newScore._id;
@@ -142,6 +177,7 @@ const QuizPage: React.FC = () => {
                             {/*         subject and timer container       */}
                             <div className={`${styles.quizHeadContainer} flex dir-row justify-space-btwn`}>
                                 <p><span>Subject:</span>&nbsp;{quizData.subject}</p>
+                                <p className="flex dir-row align-center"><span>{timer}</span>&nbsp;<RxLapTimer /></p>
                             </div>
                             {/*             question and options container       */}
                             {quizData.quesAns.length > 0 && (

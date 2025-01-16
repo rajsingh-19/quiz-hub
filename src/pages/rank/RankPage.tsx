@@ -7,6 +7,7 @@ import { getAllScores } from "../../services";
 import Navbar from "../../components/nav/Navbar";
 import DataTable from "../../components/grid/DataTable";
 
+//  interface for Score array type 
 interface ScoreArray {
     userId: {name: string};
     score: number;
@@ -14,6 +15,7 @@ interface ScoreArray {
     wrongAns: number;
 };
 
+//  interface for rank data types
 interface RankData {
     id: number;  
     name: string;
@@ -53,9 +55,7 @@ const RankPage: React.FC = () => {
                             rightAns: score.rightAns,
                             wrongAns: score.wrongAns
                         }));
-                    
-                    console.log(scoreArray);              
-                    console.log(sortedArray);              
+                                  
                     // Update the state with the ranked data
                     setScoreArray(sortedArray);
                     setLoading(false);

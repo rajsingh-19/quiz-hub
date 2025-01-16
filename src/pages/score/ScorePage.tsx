@@ -39,7 +39,6 @@ const ScorePage: React.FC = () => {
                 const scoreData = resData.result;
                 if(res.status === 200) {
                     setLoading(false);
-                    console.log(scoreData);
                     setScoreDetails(scoreData);
 
                     // Multiply rightAns and wrongAns by 10 to get percentages
