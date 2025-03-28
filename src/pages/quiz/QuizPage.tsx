@@ -83,6 +83,7 @@ const QuizPage: React.FC = () => {
     useEffect(() => {
         if (timerExpired) {
             if (currentQuestionIndex < (quizData?.quesAns.length || 0) - 1) {
+                setAnswered(true);
                 handleNext();
             } else {
                 handleSubmit();
